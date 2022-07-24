@@ -21,18 +21,15 @@
 
 const form = document.querySelector('.login-form');
 
-form.addEventListener('submit', onformSubmit);
-
-function onformSubmit(event) {
+const onFormSubmit = event => {
   event.preventDefault();
-  console.log(`нет перезагрузки страницы`);
 
-  const formData = new FormData(event.currentTarget);
-  console.log(formData);
-  formData.forEach((value, name) => {
-    console.log('name:', name);
-    console.log('value:', value);
-  });
+  const formElements = event.currentTarget.elements;
 
-  form.reset();
-}
+  if (formElements.email.value === '' || formElements.password.value === '') {
+    return alert('Все поля формы должны быть заполнены');
+  } else console.log({ email: formElements.email.value, password: formElements.password.value });
+  event.currentTarget.reset();
+};
+
+form.addEventListener('submit', onFormSubmit);
